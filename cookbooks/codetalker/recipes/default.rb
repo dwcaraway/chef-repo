@@ -23,3 +23,34 @@ user node[:codetalker][:user] do
   shell "/bin/false"
 end
 
+directory node[:codetalker][:deploy_dir] do
+  owner node[:codetalker][:user]
+  group node[:codetalker][:group]
+  recursive true
+  mode 0770
+  action :create
+end
+
+git node[:codetalker][:deploy_dir] do
+   repository "https://github.com/18F/codetalker.git"
+   reference "master"
+   action :sync
+end
+
+file node[:codetalker][:librarian_script] do
+	mode "700"
+end
+
+# bash "install_puppet_librarian" do
+# 	cwd node[:codetalker][:deploy_dir]
+# 	user "root"
+# 	command "bash #{node[:codetalker][:librarian_script]}"
+# end
+
+execute "bash #{node[:codetalker][:librarian_script]}" do
+  user "root"
+end
+
+execute "puppet apply #{node[:codetalker][:manifest]}" do
+  user "root"
+end

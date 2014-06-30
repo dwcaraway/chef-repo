@@ -6,5 +6,6 @@ Vagrant::Config.run do |config|
      chef.cookbooks_path = "cookbooks"
      chef.add_recipe "codetalker"
      chef.log_level = :debug
+     chef.verbose_logging = true
   end 
 end

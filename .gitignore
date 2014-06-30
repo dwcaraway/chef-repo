@@ -1,6 +1,7 @@
 .rake_test_cache
 *.swp
 .vagrant
+*.log
 ###
 # Ignore Chef key files and secrets
 ###
