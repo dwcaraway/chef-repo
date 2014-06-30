@@ -41,12 +41,6 @@ file node[:codetalker][:librarian_script] do
 	mode "700"
 end
 
-# bash "install_puppet_librarian" do
-# 	cwd node[:codetalker][:deploy_dir]
-# 	user "root"
-# 	command "bash #{node[:codetalker][:librarian_script]}"
-# end
-
 execute "bash #{node[:codetalker][:librarian_script]}" do
   user "root"
 end
